@@ -1,0 +1,37 @@
+hpnStart:Brax,Brock,Brash,Stump,Willow,Briar,Tangle,Grey,Fire,Ghost,Rush,Thrush,Star,Stage,Black,Red,Chamb,Whit,Gren,Brook,Bright,North,Hells,Saints,Fair
+hpnEnd: bridge,bury,ton,hall,wall,fright,dragon,bright,wind,borough,ford,blood,ly,brox,bray,bay,smith,town,lyn,ferry,ghost,haven,brook,oaks,ox,wood
+hpn:#hpnStart##hpnEnd#
+recipeName:#hpn#,#flavorMod#,#hpn#'s #flavorMod#
+flavorMod:special,dark,light,bitter,burnt,savory,flavorful,aromatic,fermented,herbal,pleasant,harsh,smoky,sweet,fresh,refreshing,somber,bright,perky,sullen,acidic,sour,peaty,juicy,perfumed,buttery,lush,brisk,strong,weak,tart,tangy,bold,overpowering,light,faint,subtle,pleasant
+	flavor:spearmint,tobacco,agave,coffee,cocoa powder,chocolate,sea salt,kosher salt,brown sugar,cinnamon,motor oil,lavender,spice,black pepper,cardamom,pumpkin spice,caramel,toffee,butterscotch,peppermint,walnut,acid,pear,citrus,grenadine,smoke,iodine,coriander,cinnamon,acid,salt,sugar,maple,coffee,whiskey,regret,sorrow,blood,gasoline,grass,cigarettes,pine,tar,saltwater,rosewater,jasmine,espresso,green apple,#fruit#,#fruit#,#fruit#,#fruit#,#fruit#
+foodAdjective:fun,festive,healthy,bountiful,decadent
+sauceType:salsa,reduction,vinagrette,sauce,jam,puree,butter,jelly,preserves
+preparedMeat:crispy bacon,pancetta,salami,prosciutto,corned beef,pastrami,roast game hen,seared ahi
+juiceNoun:juice,juice,cider,puree,syrup,paste
+juiceAdj:sparkling,fizzy,carbonated,housemade,filtered,unfiltered,fresh-squeezed,fermented
+flavoring:beef stock,champagne,red wine,white wine,soy sauce,fish sauce,ketchup,rice vinegar,white vinegar,apple-cider vinegar
+fancyWater:sparkling water,#flavor#-infused water,carbonated water,mineral water,tap water
+herb:fennel,cilantro,mint,basil,Thai basil,oregano,peppermint,spearmint,rosemary
+spice:cardamom,saffron,cinnamon,chili,cayenne,coriander,black pepper,white pepper,ginger,za’atar
+largeFruit:kumquat,honeydew<melon>,cherimoya,peach,sugar apple,persimmon,green apple,jackfruit,damson plum,kiwi,lime,key lime,meyer lemon,pomegranate,green apple,pineapple,mandarin orange,blood orange,plum,bosque pear,fig,persimmon,durian,mango,lychee
+smallFruit:black cherry,raisin,cranberry,blueberry,raspberry,lingonberry,boysenberry,elderberry,black grape,champagne grape,blackberry,marionberry,açaí berry,blackcurrant
+fruit:#largeFruit#,#smallFruit#
+greens:baby spinach,endive,radicchio,arugula,beet greens,mustard greens,green onion,watercress
+nut:almond,macademia nut,cacao nib,walnut,pumpkin seed,cashew,pecan,pistachio
+vegetable:kale,summer squash,rampion,napa cabbage,rutabaga,carrots,fennel,spring onions,arugula,kabocha,artichokes
+sauce:#flavor#-#oil# vinagrette,#flavor# reduction
+oil:duck fat,coconut oil,sesame oil,toasted sesame oil,olive oil,EVOO
+cream:coconut milk,whipped cream,almond milk,hemp milk,organic milk,soy,fermented dairy,yoghurt,goat's milk
+bread:challah,raisin bread,pumpernickel,wheat bread,sourdough,white bread,rye,puff pastry
+greens:salad,greens,bowl
+flavor:#fruit#,#flavoring#,#spice#,#herb#,#nut#
+smallThings:#nut#s,#smallFruit#s
+mix:toss,combine,mix,puree
+saladName:#recipeName# #greens#
+preparation:diced,chopped,sauteed,minced,wilted,deep-fried
+veg:plaintains,onions,kale,spinach,artichoke hearts
+preparedVeg:#preparation# #veg#
+salad:#saladName# - #mix# #preparedVeg# and #preparedVeg# in #sauce# and garnish with #smallThings#
+pizzaRecipe:#flavor# and #preparedMeat# pizza,#flavor# and #preparedMeat# pizza on #bread# dough
+pizza:#recipeName# Pizza - #pizzaRecipe#
+origin:#salad#,#pizza#

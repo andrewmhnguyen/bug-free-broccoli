@@ -1,0 +1,9 @@
+#errors
+# # #lab6
+#lists the errors found in the program of LetterHome.class
+
+1. instead of returning weather is cold when input is 2 4, it returns weather is hot
+2. instead of returning next weekend when input is 3 3, it says last  weekend
+3. instead of saying I have to buy another book, it says I have to buy another books
+4. instead of saying is not a valid sentence code, says is a valid sentence code
+

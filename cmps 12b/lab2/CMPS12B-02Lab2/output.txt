@@ -1,0 +1,20 @@
+
+GRAMMAR:
+adjective:            "#color#","#emotion#",
+place:                "school","the beach","the zoo","Burning Man",
+emotion:              "happy","sad","elated","curious","sleepy",
+origin:               "once #character# and #character# went to #place#",
+color:                "red","green","blue",
+name:                 "emily","luis","otavio","anna","charlie",
+character:            "#name# the #adjective# #animal#",
+animal:               "cat","emu","okapi",
+once otavio the blue emu and luis the curious emu went to school
+once otavio the elated cat and charlie the blue emu went to school
+once anna the elated okapi and charlie the sad okapi went to Burning Man
+once emily the happy okapi and otavio the red cat went to school
+once otavio the blue cat and emily the sleepy okapi went to the beach
+once luis the green cat and charlie the blue emu went to school
+once otavio the red emu and otavio the red okapi went to the zoo
+once charlie the green cat and luis the green okapi went to the zoo
+once luis the red emu and emily the red cat went to school
+once otavio the sad okapi and luis the happy emu went to school

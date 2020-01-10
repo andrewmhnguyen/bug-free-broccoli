@@ -1,0 +1,14 @@
+#! /bin/bash
+#--------------------------------------
+# RunLawn
+# # # lab3
+# compiles and runs Lawn.java
+#--------------------------------------
+echo "compling Lawn.java" > stdout
+javac Lawn.java >& Lawn-errs
+echo "running Lawn.class" >> stdout
+java Lawn < Lawn-in > Lawn-out
+echo "deleting Lawn.class" >> stdout
+rm Lawn.class
+
+

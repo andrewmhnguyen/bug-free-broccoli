@@ -1,0 +1,138 @@
+#include <stdlib.h>
+#include "list.h"
+#include <stdio.h>
+#include <assert.h>
+
+Node* make_node(void* data, Node* next){
+	/* 
+	* TODO 2
+	*/ 
+  Node* makeNode = calloc(1,sizeof(Node));
+  makeNode -> newData = data;
+  makeNode -> newNext = next;
+  return makeNode;
+	/* 
+	* TODO 2
+	*/ 
+}
+
+List* make_list(){
+	/* 
+	* TODO 2
+	*/ 
+  List* newList = calloc(1,sizeof (List));
+  newList -> size = 0;
+  newList -> head = NULL;	
+  return newList;
+	/* 
+	* TODO 2
+	*/ 
+}
+
+void free_node(Node* node){
+	
+	/* 
+	* TODO 2
+	*/
+  if (node-> newData != NULL){
+    free(node->newData);
+  } 
+  free(node);
+	/* 
+	* TODO 2
+	*/ 
+}
+
+void free_list(List* list) {
+	
+	/* 
+	* TODO 2
+	*/ 
+  for(int i = 0;i<list->size;i++){
+    Node* current = list->head;
+    Node* newHead = current->newNext;
+    free_node(list->head);
+    list->head = newHead;
+    
+  }
+  free(list);
+	/* 
+	* TODO 2
+	*/ 
+}
+
+void add(List* list, int index, void* data) {
+	
+	/* 
+	* TODO 2
+	*/ 
+  assert( !(index > list->size || index < 0) && "Index was out of bounds");
+
+  Node* currentNode = list->head;
+
+  for(int i = 0; i < index-1; i++){
+    currentNode = currentNode->newNext;
+  }
+  
+  
+  if(index==0){
+    Node* newNode = calloc(1,sizeof(Node));
+    newNode->newData = data;
+    newNode->newNext = list->head;
+    list->head = newNode;
+    free(newNode);
+  }
+  else if(index == list->size){
+    Node* newNode = calloc(1,sizeof(Node));
+    newNode->newData = data;
+    newNode->newNext = NULL;
+    currentNode->newNext=newNode;
+    free(newNode);
+  }
+  else{
+    Node* newNode = calloc(1,sizeof(Node));
+    newNode->newNext = currentNode->newNext;
+    currentNode->newNext = newNode;
+    free(newNode);
+  }
+  
+  int size = list->size +1;
+  list->size = size;
+  free(currentNode);
+	/* 
+	* TODO 2
+	*/ 
+}
+
+void* get(List* list, int index){
+	/* 
+	* TODO 2
+	*/ 
+  assert( !(index > list->size || index < 0) && "Index was out of bounds");
+  Node* currentNode = list->head;
+  int i =0; 
+  while(i<index){
+    currentNode = currentNode->newNext;
+    i++; 
+  }
+  return currentNode->newData;
+	/* 
+	* TODO 2
+	*/ 
+}
+
+void set(List* list, int index, void* data) {
+	
+	/* 
+	* TODO 2
+	*/ 
+  assert( !(index > list->size || index < 0) && "Index was out of bounds");
+  Node* currentNode = list->head;
+  for(int i =0; i < index; i++){
+    currentNode = currentNode->newNext;
+  }
+  currentNode->newData = data;
+	/* 
+	* TODO 2
+	*/ 
+}

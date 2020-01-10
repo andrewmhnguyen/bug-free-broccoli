@@ -1,0 +1,10 @@
+animal:cat,emu,okapi
+emotion:happy,sad,elated,curious,sleepy
+color:red,green,blue
+name:emily,luis,otavio,anna,charlie
+character:#name# the #adjective# #animal#
+place:school,the beach,the zoo,Burning Man
+adjective:#color#,#emotion#
+food:ice cream,chicken,ramen,chips
+music:rap,hip hop,country,edm
+origin:#character# ate #food# while listening to #music#.

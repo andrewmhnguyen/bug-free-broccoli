@@ -1,0 +1,25 @@
+#! /bin/bash
+#-------------------------------------------------------------------------------
+#Lawn
+# 
+##lab7
+#calculates area of lawn to be mowed and how long it would take 
+#-------------------------------------------------------------------------------
+echo "Enter the length and width of the lot, in feet:"
+read length width
+area=$( echo "scale=5;$length*$width" | bc )
+echo "Enter the length and width of the house, in feet:"
+read length2 width2
+area2=$( echo "scale=5;$length2*$width2" | bc )
+area3=$( echo "scale=5;$area-$area2" | bc )
+echo "The lawn area is $area3 square feet."
+echo "Enter the mowing rate, in square feet per second:"
+read rate
+time=$( echo "scale=5;$area3/$rate" | bc )
+s=$( echo "if($time%1>.5){$time/1+1}else{$time/1}" | bc ) 
+m=$( echo "$s/60" | bc  )     
+s=$( echo "$s%60" | bc  )    
+h=$( echo "$m/60" | bc  )     
+m=$( echo "$m%60" | bc  )     
+echo "The mowing time is $h hours, $m minutes and $s seconds."
+
