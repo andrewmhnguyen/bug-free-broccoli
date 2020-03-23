@@ -1,0 +1,12 @@
+When setting the nodes for the second bot we chose to do 1, 100, 150, and 500
+
+For the first round, we got 7 draws, 58 wins for the first bot, and 35 wins for the second bot.
+For the second round, we got 3 draws, 42 wins for the first bot, and 55 wins for the second bot.
+For the third round, we got 2 draws, 39 wins for the first bot, and 59 wins for the second bot.
+For the fourth round, we got 0 draws, 39 wins for the first bot, and 61 wins for the second bot.
+
+Overall, we can see that as we increased the number of nodes for the second bot, the better the bot 
+would be. This makes sense as it'd be able to explore more and go deeper, maybe giving a more optimal
+path compared to less nodes. I think there might be a bias towards the second bot as even when the 
+nodes were even it still tended to win more albeit not by much. 
+

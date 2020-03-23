@@ -1,0 +1,58 @@
+num_nodes modified 1000 vanilla 100
+winner:modified
+
+num_nodes modified 1000 vanilla 1000
+The 1 bot wins this round! ({1: 1, 2: -1})
+
+Round 1, fight!
+Finished!
+
+The 2 bot wins this round! ({1: -1, 2: 1})
+
+Round 2, fight!
+Finished!
+
+The draw bot wins this round! ({1: 0, 2: 0})
+
+Round 3, fight!
+Finished!
+
+The 1 bot wins this round! ({1: 1, 2: -1})
+
+Round 4, fight!
+Finished!
+
+The 1 bot wins this round! ({1: 1, 2: -1})
+
+Round 5, fight!
+Finished!
+
+The 2 bot wins this round! ({1: -1, 2: 1})
+
+Round 6, fight!
+Finished!
+
+The 1 bot wins this round! ({1: -1, 2: 1})
+
+Round 7, fight!
+Finished!
+
+The 2 bot wins this round! ({1: -1, 2: 1})
+
+Round 8, fight!
+Finished!
+
+The 2 bot wins this round! ({1: -1, 2: 1})
+
+Round 9, fight!
+Finished!
+
+....
+
+
+There is more that I didn't paste for the modified 1000 vs vanilla 1000
+The modified 1000 have a higher win rate against vanilla 100 but not too much than modified 1000 vs vanilla 1000.
+It is possible that our modification did not really have a significant influence to the Alogrithm
+We changed  changed the exploration factor
+if we win it explores less to exploit
+and if not then we explore more
