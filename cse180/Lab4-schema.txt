@@ -1,0 +1,78 @@
+C1.ALTER TABLE actors ADD CONSTRAINT proper_name
+   CHECK (SPLIT_PART(name, ' ', 1) ~ '^[A-Z]\D[a-z]*' AND SPLIT_PART(name, ' ', 1) ~ '[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTUVWXYZ]*[aeiouAEIOU][a-z]*'
+   AND SPLIT_PART(name, ' ', 1) ~ '[aeiouAEIOU]*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTUVWXYZ][aeiou]*[bcdfghjklmnpqrstvwxyz][a-z]*' AND 
+   SPLIT_PART(name, ' ', 2) ~ '^[A-Z]\D[a-z]*' AND SPLIT_PART(name, ' ', 2) ~ '[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTUVWXYZ]*[aeiouAEIOU][a-z]*'
+   AND SPLIT_PART(name, ' ', 2) ~ '[aeiouAEIOU]*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTUVWXYZ][aeiou]*[bcdfghjklmnpqrstvwxyz][a-z]*');
+
+C2.ALTER TABLE actors ADD CONSTRAINT proper_age
+   CHECK (2020-birthyear>=10 AND 2020-birthyear<=100);
+
+C3.ALTER TABLE actors ADD CONSTRAINT genders
+   CHECK(gender = 'Male' OR gender = 'Female' OR gender = 'Non-binary');
+
+C4.ALTER TABLE reviews ADD CONSTRAINT proper_review
+   CHECK(LENGTH(review_text) <= 2000 AND review_text ~'[^A-Za-z]*[A-Z].*' AND LENGTH(review_text) - LENGTH(REPLACE(review_text, '.', '')) <= 20);
+
+C5.ALTER TABLE reviews ADD CONSTRAINT proper_rating
+   CHECK(rating >= 1.0 AND rating <= 10.0);
+   ALTER TABLE imdb ADD CONSTRAINT proper_imdbrating
+   CHECK(imdb_rating >= 1.0 AND imdb_rating <= 10.0);
+
+C6.ALTER TABLE reviews DROP CONSTRAINT reviews_movieid_fkey; 
+   ALTER TABLE imdb DROP CONSTRAINT imdb_movieid_fkey;
+   ALTER TABLE movieroles DROP CONSTRAINT movieroles_actorid_fkey;
+   ALTER TABLE movieroles DROP CONSTRAINT movieroles_movieid_fkey; 
+
+   ALTER TABLE reviews ADD FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE;
+   ALTER TABLE imdb ADD FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE;
+   ALTER TABLE movieroles ADD FOREIGN KEY (actorid) REFERENCES actors(actorid) ON DELETE CASCADE;
+   ALTER TABLE movieroles ADD FOREIGN KEY (movieid) REFERENCES movies(movieid) ON DELETE CASCADE;
+
+   DELETE FROM movies WHERE movieid = 7;
+   DELETE FROM actors WHERE actorid = 5;
+
+C7.INSERT INTO actors VALUES (14, 'test case', 'Male', 2000);
+   INSERT INTO actors VALUES (14, 'Test Case', 'Male', 1900);
+   INSERT INTO actors VALUES (14, 'Test Case', 'M', 2000);
+   INSERT INTO reviews VALUES (10, 3, 1.0, 'test');
+   INSERT INTO reviews VALUES (10, 3, 0.9, 'Test');
+   INSERT INTO imdb VALUES (3, 0.9, 10);
+
+C8.SELECT * FROM movies m1, movies m2 WHERE m1.title=m2.title AND m1.genre=m2.genre AND m1.director<>m2.director;
+   Here, SQL is checking the functional dependency {title, genre} -> {director}. This means that the title and genre will uniquely determine what the director is. This query
+   takes two rows and compares them, checking if their titles and genres are the same. Afterwards, it checks the director. If the titles and genre determine director,
+   it should return an empty list as they need to be not equal to each other. However, if the list isn't empty, that means that they do not determine the director.
+
+C9.SELECT * FROM actors a1, actors a2 WHERE a1.name=a2.name AND a1.gender=a2.gender AND a1.birthyear<>a2.birthyear;
+   Similar to the problem above except it is checking the dependency {name, gender} -> birthyear. This is checking that name and gender will uniquely determine birthyear. SQL
+   takes all results where name and gender are the same and then compares the birthyear. If the birthyears aren't equal then it will show up as a result from the query, meaning
+   the functional dependency does not hold. 
+
+C10. INSERT INTO movies VALUES (10, 'Jurassic Park', '{"Action","Adventure","Sci-Fi"}', 1993, 'Test Case');
+     INSERT INTO actors VALUES (14, 'Kurt Russell', 'Male', 2000);
+
+     DELETE FROM movies WHERE movieid = 10;
+     DELETE FROM actors WHERE actorid = 14;
+
+Q1.INSERT INTO movies VALUES (10, 'Kung Fu Hustle', '{"Action","Comedy"}', 2004, 'Stephen Chow');
+   INSERT INTO actors VALUES (14, 'Stephen Chow', 'Male', 1962);
+   INSERT INTO movieroles VALUES (14, 10, 'Sing');
+   INSERT INTO reviews VALUES(10, 10, 8, 'Chow''s movie may seem nutty on the surface, but its slyness, its dreamy unfolding of so many moods and genres, becomes intoxicating.');
+   INSERT INTO imdb VALUES(10, 7.7, 'tt0373074');
+
+Q2.SELECT title, movies.movieid>9 AS "New Movie", imdbid, rating FROM movies 
+   JOIN reviews ON movies.movieid = reviews.movieid
+   JOIN imdb ON movies.movieid = imdb.movieid;
+
+Q3.SELECT name, name='Stephen Chow' as "New Actor" FROM actors;
+   
+Q4.SELECT role, actorid=14 OR movieid=10 AS "New Role" FROM movieroles;
+
+Q5.Return the roles of male actors who are above the average age of both female and male actors in descending order. 
+
+   SELECT role FROM movieroles
+   JOIN actors ON movieroles.actorid = actors.actorid
+   WHERE gender = 'Male' AND 2020-birthyear > ALL (
+      SELECT AVG(2020-birthyear) AS age FROM actors
+      GROUP BY gender)
+   ORDER BY 2020-birthyear DESC;

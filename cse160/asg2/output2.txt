@@ -1,0 +1,132 @@
+Script started on Fri 01 May 2020 05:30:03 AM PDT
+[?1034hbash-4.2$ psql -h cse180-db-spring.lt.ucsc.edu -U anguy224
+Password for user anguy224: 
+psql (11.7)
+Type "help" for help.
+
+[?1034hanguy224=> SELECT title FROM movies 
+anguy224->     WHERE genre @> '{Action}' OR genre @> '{Adventure}' OR genre @> '{Crime}';
+               title                
+------------------------------------
+ Jurassic Park
+ The Terminator
+ Ghostbusters
+ Zombieland
+ Sherlock Holmes: A Game of Shadows
+(5 rows)
+
+anguy224=> SELECT title FROM movies 
+anguy224->     WHERE genre @> '{Horror, Comedy}';
+   title    
+------------
+ Zombieland
+(1 row)
+
+anguy224=> SELECT name FROM actors 
+anguy224->      WHERE name LIKE '% H%';
+      name       
+-----------------
+ Linda Hamilton
+ Woody Harrelson
+ Jonah Hill
+(3 rows)
+
+anguy224=> SELECT name from actors
+anguy224->      JOIN movieroles ON actors.actorid = movieroles.actorid 
+anguy224->      WHERE movieroles.movieid IN (5);
+         name          
+-----------------------
+ Linda Hamilton
+ Michael Biehn
+ Arnold Schwarzenegger
+(3 rows)
+
+anguy224=> SELECT title, imdb_rating FROM movies
+anguy224->      JOIN imdb ON movies.movieid = imdb.movieid
+anguy224->      ORDER BY imdb_rating DESC;
+               title                | imdb_rating 
+------------------------------------+-------------
+ Alien                              |         8.4
+ 1917                               |         8.4
+ The Thing                          |         8.1
+ Jurassic Park                      |         8.1
+ The Terminator                     |           8
+ Ghostbusters                       |         7.8
+ Zombieland                         |         7.6
+ Superbad                           |         7.6
+ Sherlock Holmes: A Game of Shadows |         7.5
+ The Thing                          |         6.2
+(10 rows)
+
+anguy224=> SELECT role FROM movieroles
+anguy224->      JOIN movies ON movieroles.movieid = movies.movieid
+anguy224->      WHERE movies.movieid in(
+anguy224(>         SELECT movies.movieid from movies
+anguy224(>         JOIN movieroles ON movieroles.movieid = movies.movieid
+anguy224(>         JOIN actors on movieroles.actorid = actors.actorid
+anguy224(>         WHERE gender in (
+anguy224(>            SELECT gender FROM actors 
+anguy224(>            WHERE movieroles.movieid = actors.actorid AND gender = 'Male'))
+anguy224->      AND year < 2000
+anguy224->      ORDER BY role;
+       role        
+-------------------
+ Dr. Peter Venkman
+ Kyle Reese
+ MacReady
+ Sarah Connor
+ Terminator
+(5 rows)
+
+anguy224=> 
+anguy224=> 
+anguy224=> 
+anguy224=> 
+anguy224=> \dn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ lab1   | anguy224
+ public | postgres
+(2 rows)
+
+anguy224=> \dn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ lab1   | anguy224
+ public | postgres
+(2 rows)
+
+anguy224=> \dn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ lab1   | anguy224
+ public | postgres
+(2 rows)
+
+anguy224=> \dm[Kn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ lab1   | anguy224
+ public | postgres
+(2 rows)
+
+anguy224=> \dn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ lab1   | anguy224
+ public | postgres
+(2 rows)
+
+anguy224=> \q
+bash-4.2$ 
+bash-4.2$ s[Kls
+Desktop    Lab-schema.txt   OldFiles  Templates  cs112	cse120	    output2.txt  welcome
+Documents  Lab1-schema.txt  Pictures  Videos	 cs12a	labl	    perl5
+Downloads  Music	    Public    cs101	 cs12b	output.txt  public_html
+bash-4.2$ nano
+[?1049h[1;35r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.3.1                      New Buffer                                                    [34;1H^G(B[m Get Help     (B[0;7m^O(B[m WriteOut     (B[0;7m^R(B[m Read File    (B[0;7m^Y(B[m Prev Page    (B[0;7m^K(B[m Cut Text     (B[0;7m^C(B[m Cur Pos[35d(B[0;7m^X(B[m Exit[35;17H(B[0;7m^J(B[m Justify	(B[0;7m^W(B[m Where Is     (B[0;7m^V(B[m Next Page    (B[0;7m^U(B[m UnCut Text   (B[0;7m^T(B[m To Spell[3d[33d(B[0;7mFile to insert [from ./] :                                                                          [34;17H(B[m[17X[34;34H(B[0;7m^T(B[m To Files[22X[34;67H(B[0;7mM-F(B[m New Buffer[K[35;2H(B[0;7mC(B[m Cancel	          	 (B[0;7m^X(B[m Execute Command[K[33;28H[?25l[1;32H(B[0;7mDIR: /afs/cats.ucsc.edu/users/r/anguy224/[3d..                 (parent dir)(B[m  .cache[3;60H(dir)  .config[93G(dir)[4d.dbus[4;27H(dir)  .emacs.d[4;60H(dir)  .ghc[93G(dir)[5d.local[5;27H(dir)  .mozilla[5;60H(dir)  .pki[93G(dir)[6d.ssh[6;27H(dir)  cs101[6;60H(dir)  cs112[93G(dir)[7dcs12a[7;27H(dir)  cs12b[7;60H(dir)  cse120[93G(dir)[8dDesktop[8;27H(dir)  Documents[8;60H(dir)  Downloads[93G(dir)[9dlabl[9;27H(dir)  Music[9;60H(dir)  OldFiles[93G(dir)[10dperl5[10;27H(dir)  Pictures[10;60H(dir)  public_html[93G(dir)[11dPublic[11;27H(dir)  Templates[11;60H(dir)  Videos[93G(dir)[12d.#tracery_recursion.c[12;30H--  .bash_history[12;60H30 KB  .cshrc[94G1 KB[13d.emacs[13;27H14  B  .esd_auth[13;60H16  B  .ICEauthority[13;92H310  B[14d.login[14;26H742  B  .mysql_history[14;59H100  B  .psql_history[93G61 KB[15d.viminfo[15;26H526  B  Lab-schema.txt[15;60H32 KB  Lab1-schema.txt[15;92H220 KB[16doutput.txt[16;28H4 KB  output2.txt[16;61H4 KB  welcome[16;92H224  B[33d[K[34;17H(B[0;7m^W(B[m Where Is     (B[0;7m^V(B[m Next Page    (B[0;7m^F(B[m Forward	(B[0;7m^P(B[m Prev Line    (B[0;7mM-|(B[m First File[35;2H(B[0;7mX(B[m Exit  	(B[0;7m^Y(B[m Prev Page    (B[0;7mF16(B[m WhereIs Next(B[0;7m^B(B[m Back[35;65H(B[0;7m^N(B[m Next Line    (B[0;7mM-?(B[m Last File[17d[3d..[17X[3;20H(parent dir)[4d(B[0;7m.dbus                     (dir)[17d(B[m[4d.dbus[21X[4;27H(dir)  (B[0;7m.emacs.d                  (dir)[17d(B[m[4;34H.emacs.d[18X[4;60H(dir)  (B[0;7m.ghc                      (dir)[17d(B[m[4;67H.ghc[22X[93G(dir)[5;67H(B[0;7m.pki                      (dir)[17d(B[m[5;34H(B[0;7m.mozilla                  (dir)(B[m  .pki[22X[93G(dir)[17d[5;34H.mozilla[18X[5;60H(dir)[6;34H(B[0;7mcs101                     (dir)[17d(B[m[6;34Hcs101[21X[6;60H(dir)[7;34H(B[0;7mcs12b                     (dir)[17d(B[m[7;34Hcs12b[21X[7;60H(dir)[8;34H(B[0;7mDocuments                 (dir)[17d(B[m[8;34HDocuments[17X[8;60H(dir)[9;34H(B[0;7mMusic                     (dir)[17d(B[m[9;34HMusic[21X[9;60H(dir)[10;34H(B[0;7mPictures                  (dir)[17d(B[m[10;34HPictures[18X[10;60H(dir)[11;34H(B[0;7mTemplates                 (dir)[17d(B[m[11;34HTemplates[17X[11;60H(dir)[12;34H(B[0;7m.bash_history             30 KB[17d(B[m[12;34H.bash_history             30 KB[13;34H(B[0;7m.esd_auth                 16  B[17d(B[m[13;34H.esd_auth[17X[13;60H16  B[14;34H(B[0;7m.mysql_history           100  B[17d(B[m[14;34H.mysql_history           100  B[15;34H(B[0;7mLab-schema.txt            32 KB[17d(B[m[15;34HLab-schema.txt            32 KB[16;34H(B[0;7moutput2.txt                4 KB[17d(B[m[?12l[?25h[1;32H(B[0;7m       New Buffer                        [1;91HModified[3d(B[m  List of schemas[K[4d  Name  |  Owner[K[5d--------+----------[K[6d lab1   | anguy224[K[7d public | postgres[K[8d(2 rows)[K[9d[K[10danguy224=> \q[K[11dbash-4.2$[K[12dbash-4.2$ s^H^[[Kls[K[13dDesktop    Lab-schema.txt   OldFiles  Templates  cs112  cse120      output2.txt  welcome[K[14dDocuments  Lab1-schema.txt  Pictures  Videos     cs12a  labl        perl5[K[15dDownloads  Music[15;26H   Public    cs101      cs12b  output.txt  public_html[K[16dbash-4.2$ nano[K[17d^[[?1049h^[[1;35r^[(B^[[m^[[4l^[[?7h^[[?12l^[[?25h^[[?1h^[=^[[?1h^[=^[[?1h^[=^[[39;49m^[[39;49m^[(B$[33;42H(B[0;7m[ Read 132 lines ][34;18HO(B[m WriteOut	[C(B[0;7mR(B[m Read Fil	[C(B[0;7mY(B[m Prev Page    (B[0;7m^K(B[m Cut Text     (B[0;7m^C(B[m Cur Pos[K[

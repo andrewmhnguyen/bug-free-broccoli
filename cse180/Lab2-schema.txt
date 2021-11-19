@@ -1,0 +1,17 @@
+1. SELECT name, 2020 - birthyear AS age FROM actors; 
+
+
+
+2. SELECT SPLIT_PART(name, ' ', 1) AS first_name, SPLIT_PART(name, ' ', 2) AS last_name FROM actors;
+
+
+
+3. SELECT MIN(imdb_rating), MAX(imdb_rating), AVG(imdb_rating) FROM imdb;
+
+
+
+4. SELECT SUM(2020-birthyear), AVG(2020 - birthyear), MIN(2020 - birthyear), MAX(2020 - birthyear) FROM actors GROUP BY gender;
+
+
+
+5. SELECT STRING_AGG(name, '; '), title FROM actors JOIN movieroles on actors.actorid = movieroles.actorid JOIN movies on movieroles.movieid = movies.movieid WHERE EXISTS(SELECT COUNT(actorid)>1, movieid FROM movieroles GROUP BY movieid;) GROUP BY movies.movieid;

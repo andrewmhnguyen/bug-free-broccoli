@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Blocky Animal</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+    
+    <p>Animation:
+      <button type ="button" id="onButton">ON</button>
+      <button type ="button" id="offButton">OFF</button>
+  </p>
+    
+
+    <p>
+    Camera Angle <input type="range" min="0" max="180" value="5" class="slider" id="angleSlide">
+    </p>
+
+    <p>
+    Right Thigh Angle <input type="range" min="-45" max="45" value="0" class="slider" id="thighSlide">
+    </p>
+
+    <p>
+    Right Shin Angle <input type="range" min="90" max="180" value="180" class="slider" id="shinSlide">
+    </p>
+
+    <p>
+    Right Foot Angle <input type="range" min="-20" max="20" value="0" class="slider" id="footSlide">
+    </p>
+
+    <p>
+    Left Thigh Angle <input type="range" min="-45" max="45" value="0" class="slider" id="thighSlide2">
+      </p>
+  
+      <p>
+    Left Shin Angle <input type="range" min="90" max="180" value="180" class="slider" id="shinSlide2">
+      </p>
+  
+      <p>
+    Left Foot Angle <input type="range" min="-20" max="20" value="0" class="slider" id="footSlide2">
+      </p>
+    
+
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <script src="lib/cuon-matrix-cse160.js"></script>
+    <script src="Points.js"></script>
+    <script src="Triangles.js"></script>
+    <script src="Circles.js"></script>
+    <script src="BlockyAnimal.js"></script>
+    <script src="Cubes.js"></script>
+
+  </body>
+</html>

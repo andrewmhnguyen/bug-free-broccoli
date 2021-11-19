@@ -1,0 +1,98 @@
+Script started on Fri 01 May 2020 05:25:39 AM PDT
+[?1034hbash-4.2$ script -a Lab-schema.txt[C[C[C[C[C[C[C[C[C[Cpsql -h cse180-db-spring.lt.ucsc.edu -U anguy224
+Password for user anguy224: 
+psql (11.7)
+Type "help" for help.
+
+[?1034hanguy224=> SELECT * FROM actors 
+anguy224->     WHERE birthyear < 1960;
+ actorid |         name          | gender | birthyear 
+---------+-----------------------+--------+-----------
+       0 | Kurt Russell          | Male   |      1951
+       1 | Sigourney Weaver      | Female |      1949
+       2 | Linda Hamilton        | Female |      1956
+       3 | Michael Biehn         | Male   |      1956
+       4 | Arnold Schwarzenegger | Male   |      1947
+       5 | Bill Murray           | Male   |      1950
+(6 rows)
+
+anguy224=> SELECT * FROM actors 
+anguy224->     LEFT JOIN movieroles on movieroles.actorid = actors.actorid 
+anguy224->     WHERE actors.actorid < 9 AND actors.actorid > 3 AND movieroles.actorid IS NOT NULL; [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K;
+ actorid |         name          | gender | birthyear | actorid | movieid |       role        
+---------+-----------------------+--------+-----------+---------+---------+-------------------
+       5 | Bill Murray           | Male   |      1950 |       5 |       6 | Dr. Peter Venkman
+       5 | Bill Murray           | Male   |      1950 |       5 |       7 | Bill Murray
+       7 | Emma Stone            | Female |      1988 |       7 |       9 | Jules
+       4 | Arnold Schwarzenegger | Male   |      1947 |       4 |       5 | Terminator
+(4 rows)
+
+anguy224=> SELECT name FROM actors 
+anguy224->     WHERE EXISTS(
+anguy224(>        SELECT actorid FROM movieroles 
+anguy224(>        WHERE actors.actorid = movieroles.actorid AND actorid<9 AND actorid>3);
+         name          
+-----------------------
+ Arnold Schwarzenegger
+ Bill Murray
+ Emma Stone
+(3 rows)
+
+anguy224=> SELECT title FROM movies 
+anguy224->     WHERE EXISTS(
+anguy224(>        SELECT rating FROM reviews 
+anguy224(>        WHERE movies.movieid = reviews.movieid AND rating > 7.5) 
+anguy224->     AND EXISTS(
+anguy224(>        SELECT imdb_rating FROM imdb 
+anguy224(>        WHERE movies.movieid = imdb.movieid AND imdb_rating > 7.5);
+     title      
+----------------
+ The Thing
+ 1917
+ Jurassic Park
+ The Terminator
+ Ghostbusters
+ Zombieland
+(6 rows)
+
+anguy224=> SELECT title FROM movies 
+anguy224->     WHERE EXISTS(
+anguy224(>        SELECT review_text FROM reviews 
+anguy224(>        WHERE movies.movieid = reviews.movieid AND review_text LIKE '%'||title||'%');
+     title     
+---------------
+ The Thing
+ 1917
+ Jurassic Park
+ Alien
+ Ghostbusters
+(5 rows)
+
+anguy224=> SELECT actors.name, director FROM actors 
+anguy224->     JOIN movieroles on actors.actorid = movieroles.actorid 
+anguy224->     JOIN movies on movieroles.movieid = movies.movieid 
+anguy224->     WHERE movieroles.movieid 
+anguy224->     IN (
+anguy224(>        SELECT movieid FROM movieroles 
+anguy224(>        GROUP BY movieid having count(*)>1) 
+anguy224->     ORDER BY movies.director;
+         name          |   director    
+-----------------------+---------------
+ Jude Law              | Guy Ritchie
+ Rachel McAdams        | Guy Ritchie
+ Linda Hamilton        | James Cameron
+ Michael Biehn         | James Cameron
+ Arnold Schwarzenegger | James Cameron
+(5 rows)
+
+anguy224=> SELECT name, title FROM actors
+anguy224->     JOIN movieroles on actors.actorid = movieroles.actorid 
+anguy224->     JOIN movies on movieroles.movieid = movies.movieid 
+anguy224->     WHERE role LIKE '%'||name||'%';
+    name     |   title    
+-------------+------------
+ Bill Murray | Zombieland
+(1 row)
+
+anguy224=> SELECT title FROM movies 
+anguy224->     WHERE genre @> '{Action}' OR genre @> '{Adventure}' OR g

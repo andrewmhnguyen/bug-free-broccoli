@@ -1,0 +1,196 @@
+Script started on Fri 17 Apr 2020 07:08:10 PM PDT
+[?1034hbash-4.2$ psql -h cse180-db-spring.lt.ucsc.edu -U anguy224[C[C[C[C[C[C[C[C[C[C[23Pscript -a Lab1-schema.txt[3PLab1-schema.txt-a Lab1-schema.txt[C[C[C[C[C[C[C[C[C[Cpsql -h cse180-db-spring.lt.ucsc.edu -U anguy224
+Password for user anguy224: 
+psql (11.7)
+Type "help" for help.
+
+[?1034hanguy224=> DROP SCHEMA lab1 CASCADE
+anguy224-> ;
+NOTICE:  drop cascades to 5 other objects
+DETAIL:  drop cascades to table movies
+drop cascades to table actors
+drop cascades to table movieroles
+drop cascades to table reviews
+drop cascades to table imdb
+DROP SCHEMA
+anguy224=> CREATE SCHEMA lab[K[K[KLab1;
+CREATE SCHEMA
+anguy224=> ALTER ROLE anguy224 SET SEARCH)[K_PATH TO Lab1;
+ALTER ROLE
+anguy224=> CREATE TABLE Movies(
+anguy224(> movieid INTEGER PRIMARY KEY,
+anguy224(> title TEXT,
+anguy224(> genre TEXT[],
+anguy224(> year INTEGER CHECK(year > 999 AND year < 10000), 
+anguy224(> director TEXT
+anguy224(> );
+CREATE TABLE
+anguy224=> CREATE TABLE actors(
+anguy224(> actorid INTEGER PRIMARY KEY,
+anguy224(> name TEXT,
+anguy224(> gender TEXT CHECK(gender = 'Male' OR gender = 'Female' OR gender = 'Non-binary'),
+anguy224(> birthyear INTEGER CHECK(birthyear > 999 AND birthyear < 10000
+anguy224(> );
+anguy224(> 
+anguy224(> );
+ERROR:  syntax error at or near ";"
+LINE 6: );
+         ^
+anguy224=> CREATE TABLE actors(
+actorid INTEGER PRIMARY KEY,
+name TEXT,
+gender TEXT CHECK(gender = 'Male' OR gender = 'Female' OR gender = 'Non-binary'),
+birthyear INTEGER CHECK(birthyear > 999 AND birthyear < 10000
+);
+);[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[K
+[K
+[K
+[K
+[K
+[K
+[K[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C[CCREATE TABLE actors(
+anguy224(> actorid INTEGER PRIMARY KEY,
+anguy224(> name TEXT,
+anguy224(> gender TEXT CHECK(gender = 'Male' OR gender = 'Female' OR gender = 'Non-binary'),
+anguy224(> birthyear INTEGER CHECK(birthyear > 999 AND birthyear < 10000)
+anguy224(> );
+CREATE TABLE
+anguy224=> CREATE TABLE MovieRoles(
+anguy224(> actorid INTEGER REFERENCES actors(actorid),
+anguy224(> movieid INTEGER REFERENCES movies(movieid),
+anguy224(> role TEXT,
+anguy224(> PRIMARY KEY (actorid, movieid)
+anguy224(> );
+CREATE TABLE
+anguy224=> CREATE TABLE Reviews(
+anguy224(> customerid INTEGER,
+anguy224(> movieid INTEGER REFERENCES movies(movieid),
+anguy224(> rating FLOAT CHECK(rating >= 1 AND rating <= 10),
+anguy224(> review_text TEXT CHECK(LENGTH(review_text) <= 2000),
+anguy224(> PRIMARY KEY(customerid, movieid)
+anguy224(> );
+CREATE TABLE
+anguy224=> CREATE TABLE Imdb(
+anguy224(> movieid INTEGER REFERENCES movies(movieid),
+anguy224(> imdb_rating FLOAT CHECK(imdb_rating >= 1 AND imdb_rating <= 10),
+anguy224(> imdbid TEXT,
+anguy224(> PRIMARY KEY(movieid)
+anguy224(> );
+CREATE TABLE
+anguy224=> INSERT INTO movies (movieid, title, genre, year, director) VALUES
+anguy224-> (0, 'The Thing', '{"Horror", "Mystery", "Sci-Fi'}', 1982, 'John Carpenter'),
+anguy224'> (1, 'The Thing', '{"Horror", "Mystery", "Sci-Fi"}', 2011, 'Matthijs van  Heijningen Jr.') ,
+anguy224'> (2, '1917', '{"Drama","War"}', 2019, 'Same Mendes'),
+anguy224'> (3, 'Jurassic Park', '{"Action","Adventure","Sci-Fi"}', 1993, 'Steven Spielberg'),
+anguy224'> (4, 'Alien', '{"Horror","Sci-Fi"}', 1979, 'Ridley Scott'),
+anguy224'> (5, 'The Terminator', '{"Action", "Sci-Fi"}', 1984, 'James Cameron'),
+anguy224'> (6, 'Ghostbusters', '{"Action", "Comedy", "Fantasy"}', 1984, 'James Cameron'),
+anguy224'> (7, 'Zombieland', '{"Adventure", "Comedy", "Horror"}', 2009, 'Ruben Fleischer'),
+anguy224'> (8, 'Sherlock Holmes: A Game of Shadows', '{"Action", "Adventure", "Crime"}', 2011, 'Guy  Ritchie'),
+anguy224'> (9, 'Superbad', '{"Comedy"}', 2007, 'Greg Mottola');
+anguy224'> 
+anguy224'> 
+anguy224'> '
+anguy224(> )
+anguy224-> 
+anguy224-> 
+anguy224-> )
+anguy224-> ;
+ERROR:  syntax error at or near "}"
+LINE 2: (0, 'The Thing', '{"Horror", "Mystery", "Sci-Fi'}', 1982, 'J...
+                                                        ^
+anguy224=> INSERT INTO movies (movieid, title, genre, year, director) VALUES
+anguy224-> (0, 'The Thing', '{"Horror", "Mystery", "Sci-Fi"}', 1982, 'John Carpenter'),
+anguy224-> (1, 'The Thing', '{"Horror", "Mystery", "Sci-Fi"}', 2011, 'Matthijs van  Heijningen Jr.') ,
+anguy224-> (2, '1917', '{"Drama","War"}', 2019, 'Same Mendes'),
+anguy224-> (3, 'Jurassic Park', '{"Action","Adventure","Sci-Fi"}', 1993, 'Steven Spielberg'),
+anguy224-> (4, 'Alien', '{"Horror","Sci-Fi"}', 1979, 'Ridley Scott'),
+anguy224-> (5, 'The Terminator', '{"Action", "Sci-Fi"}', 1984, 'James Cameron'),
+anguy224-> (6, 'Ghostbusters', '{"Action", "Comedy", "Fantasy"}', 1984, 'James Cameron'),
+anguy224-> (7, 'Zombieland', '{"Adventure", "Comedy", "Horror"}', 2009, 'Ruben Fleischer'),
+anguy224-> (8, 'Sherlock Holmes: A Game of Shadows', '{"Action", "Adventure", "Crime"}', 2011, 'Guy  Ritchie'),
+anguy224-> (9, 'Superbad', '{"Comedy"}', 2007, 'Greg Mottola');
+INSERT 0 10
+anguy224=> INSERT INTO actors (actorid, name, gender, birthyear) VALUES
+anguy224-> (0, 'Kurt Russell', 'Male', 1951),
+anguy224-> (1, 'Sigourney Weaver', 'Female', 1949),
+anguy224-> (2, 'Linda Hamilton', 'Female', 1956),
+anguy224-> (3, 'Michael Biehn', 'Male', 1956),
+anguy224-> (4, 'Arnold Schwarzenegger', 'Male', 1947),
+anguy224-> (5, 'Bill Murray', 'Male', 1950),
+anguy224-> (6, 'Jesse Eisenberg', 'Male', 1983),
+anguy224-> (7, 'Emma Stone', 'Female', 1988),
+anguy224-> (8, 'Woody Harrelson', 'Male', 1961),
+anguy224-> (9, 'Natalie Portman', 'Female', 1981),
+anguy224-> (10, 'Rachel McAdams', 'Female', 1978),
+anguy224-> (11, 'Jonah Hill', 'Male', 1983),
+anguy224-> (12, 'Jude Law', 'Male', 1972),
+anguy224-> (13, 'Mary Elizabeth Winstead', 'Female', 1984);
+INSERT 0 14
+anguy224=> INSERT INTO movieroles (actorid, movieid, role) VALUES
+anguy224-> (0, 0, 'MacReady'),
+anguy224-> (13, 1, 'Kate Lloyd'),
+anguy224-> (5, 6, 'Dr. Peter Venkman'),
+anguy224-> (5, 7, 'Bill Murray'),
+anguy224-> (12, 8, 'Dr. John Watson'),
+anguy224-> (10, 8, 'Irene Adler'),
+anguy224-> (7, 9, 'Jules'),
+anguy224-> (1, 4, 'Ripley'),
+anguy224-> (2, 5, 'Sarah Connor'),
+anguy224-> (3, 5, 'Kyle Reese'),
+anguy224-> (4, 5, 'Terminator');
+INSERT 0 11
+anguy224=> INSERT INTO reviews (customerid, movieid, rating, review_text) VALUES
+anguy224-> (0, 3, 9, "What can I say? Jurassic Park is one of the most underrated movies ever. Yes,  I did say underrated. True, it is the fourth highest grossing movie ever (for the time being) and wa s a motion picture bible for eight-year-olds across the country, but it has never been regarded as a rtistically superior. When, in reality, it is one of the most artistically inventive movies ever. It  contains all of Spielberg's magical strokes of genius from fantastic art direction and wonderful ca mera techniques to astounding technical quality ( which comes from his well known control over techn ology). The minor flaws of a theme park are masterfully embedded into the art direction, script etc.  and the acting is superb. This is one of the only movies I've seen with great acting by children. S pielberg's camera usage ranges from foreshadowing the appearance of dinosaurs with extreme up-angles  to exquisitely composed scenes of the dinosaurs' 'interaction' with the characters. Aside from tech nical quality, Jurassic Park bears powerful social messages of human intrusion and destruction of na tural environment and the self-revering nature of man. Also, it had an undeniable effect on cinema b eing one of the first movies to use CGI at such a large scale. However, the most ingenious aspect of  the film is the portrayal of the dinosaurs as animals rather than ruthless monsters. At many times  throughout the movie, the humans are portrayed as antagonists and the respect and appreciation of th e dinosaurs is wonderfully developed. And, best of all, like star wars you can analyze the movie all  you want or just sit back and enjoy the ride."),
+anguy224-> (1, 5, 8, "This movie is a solid action movie. Not all of the dialogue is great and some  of the effects are a bit dated - but this movie is still effective. The acting is great. The plot is  great. This movie is well-shot and worth watching. I can't really come up with many things that are  bad about it that don't have to do with it being old. This is just a fun movie with good action, ti me travel, and robots. I'd definitely recommend this movie. Its worth watching if you're looking for  a good time."),
+anguy224-> (2, 7, 8, "This film was a fun ride all the way through. It's lack of scariness(non exist ent) and *GASP!* gore is more than made up for with the constant flow of hilarity and likable charac ters. This is by far the optimist's zombie film, as the way things play out are definitely different  than any one thats come before it(definitely not a Romero flick, though I think his Land of the Dea d actually is second place in this regard). It has a sleek, very modern sense of style-just watch fo r how each rule makes it's appearance/reappearance and a good message on the importance of others in  the worst of times. I recommend this to anybody who has a remote interest in comedies, zombie/end o f the world flicks, or just having a good time at the theater, and look forward to seeing it again w hen it comes out."),
+anguy224-> (3, 6, 10, "There aren't many movies better than Ghostbusters. This film expertly balance s itself right between the horror genre and the comedy genre. The chemistry of the main three charac ters is undeniable, and when you throw in interesting side characters (such as Rick Moranis as Louis  Tully), every scene is a delight to watch. The story is original, the effects are impressive and th e jokes are funny - in short, Ghostbusters is a timeless classic."),
+anguy224-> (4, 2, 10, "I sat in a packed yet silent theater this morning and watched, what I believe  to be, the next Academy Award winner for the Best Picture. I'm not at all a fan of war movies but I  am a fan of great movies....and 1917 is a great movie. I have never been so mesmerized by set desig n and direction, the mass human emotion of this film is astonishingly captured and embedded magicall y in the audience. It keeps running through my mind...the poetry and beauty intertwined with the raw  misery of war. Treat yourself....see this movie!"),
+anguy224-> (5, 1, 7, "This film deserves the criticism it gets and while flawed and nowhere near the  classic Carpenter film, it did finally tell the tale of how the Thing was discovered. Also the limi tations of the Thing not being able to replicate metal was a clever touch in my opinion."),
+anguy224-> (6, 8, 6, "Well, I am bit puzzled. What can I say? Was the movie well done? Yes and no. T here are certain weak parts and obvious stronger bits. Jude Law and Robert Downey Jnr both are great  as Watson and Holmes, as well as Stephen Fry is a very funny Microft. But then, there are some big  mistakes in casting. Noomi Rapace is The biggest blunder. She was great in The Swedish Girl Who... T rilogy, but here no. She is weak, pale, blunt, shallow and gray. The only part we remember of her? H er eating some food near The Eiffel Tower. Pity that there is no so much Rachel McAdamas this time,  she was great then and good here What else can I say? The movie is well cut and shot, it is dark and  ominous, as intended, and some scenes are pure Matrix-quality. But then, there are so many goofs an d funny anachronisms that make the whole movie a bit unserious. My opinion? it was OK, and fun. A bi t too prolonged at times."),
+anguy224-> (7, 9, 7, "From all the Booksmart ripoffs I've seen, this is clearly one of the better on es."),
+anguy224-> (8, 4, 6, "'Alien' while technically science fiction is also one of the greatest horror/s uspense movies ever made. Ridley Scott is now one of the most well known and successful directors in  Hollywood, but I don't think anything he's made in the last ten years is a patch on this perfect fi lm, which is a near masterpiece in my opinion. In fact, on reflection there are only three Scott mov ies I genuinely like, those being his first three. The last of these 'Blade Runner' was released twe nty years ago now, so to me Scott is long past his use by date. Whatever, 'Alien' itself is a brilli ant piece of work, and is almost flawless. Scott's direction is superb and everything else about it  is outstanding - a strong script from Dan O'Bannon et al, an evocative score from Jerry Goldsmith, b rilliant design and special effects, including the amazing contributions from H.R.Giger, all add up  to an amazing movie experience. I also really liked how the cast were character actors and not 'star s' so there was plenty of suspense generated as to who will live and who will die. This is something  very few subsequent movies have done, 'Pitch Black' being one of the exceptions. Sigourney Weaver m ay be an icon as Ripley now, but when the movie was first released she was virtually unknown, having  had a small cameo in Woody Allen's 'Annie Hall' and not much else. The rest of the cast are equally  as good. I especially enjoyed Yaphet Kotto ('Blue Collar') and the legendary Harry Dean Stanton ('W ise Blood') as the wise cracking 'below deck' crew. Many people seem to prefer James Cameron's seque l 'Aliens' over this, but as I much prefer horror and suspense movies to action ones I think this is  definitely the better movie, and still the strongest and most effective in the series. 'Alien' is a  horror classic and an absolutely unforgettable movie that I can't recommend highly enough. If you h aven't seen it before watch it immediately!"),
+anguy224-> (9, 0, 10, "John Carpenter's The Thing is hands down the best horror film ever made. Not  only that, but it is also on of my personal favorite films of all time. What makes the movie so grea t? It's hard to put my finger on it. Everything just seems to work in The Thing, it's one of the rar e occasions where everything just seems to fall in place. The film is even superior to Alien in crea ting a type of moody atmospheric hell. The fact that it's not only about the gore (which is wonderfu l btw), but it is able to create a paranoia that is unmatched in films. A truly wonderful film that  is worshiped by all horror buffs, and anyone who has good taste in films.");
+NOTICE:  identifier "What can I say? Jurassic Park is one of the most underrated movies ever. Yes, I did say underrated. True, it is the fourth highest grossing movie ever (for the time being) and was a motion picture bible for eight-year-olds across the country, but it has never been regarded as artistically superior. When, in reality, it is one of the most artistically inventive movies ever. It contains all of Spielberg's magical strokes of genius from fantastic art direction and wonderful camera techniques to astounding technical quality ( which comes from his well known control over technology). The minor flaws of a theme park are masterfully embedded into the art direction, script etc. and the acting is superb. This is one of the only movies I've seen with great acting by children. Spielberg's camera usage ranges from foreshadowing the appearance of dinosaurs with extreme up-angles to exquisitely composed scenes of the dinosaurs' 'interaction' with the characters. Aside from technical quality, Jurassic Park bears powerful social messages of human intrusion and destruction of natural environment and the self-revering nature of man. Also, it had an undeniable effect on cinema being one of the first movies to use CGI at such a large scale. However, the most ingenious aspect of the film is the portrayal of the dinosaurs as animals rather than ruthless monsters. At many times throughout the movie, the humans are portrayed as antagonists and the respect and appreciation of the dinosaurs is wonderfully developed. And, best of all, like star wars you can analyze the movie all you want or just sit back and enjoy the ride." will be truncated to "What can I say? Jurassic Park is one of the most underrated mov"
+NOTICE:  identifier "This movie is a solid action movie. Not all of the dialogue is great and some of the effects are a bit dated - but this movie is still effective. The acting is great. The plot is great. This movie is well-shot and worth watching. I can't really come up with many things that are bad about it that don't have to do with it being old. This is just a fun movie with good action, time travel, and robots. I'd definitely recommend this movie. Its worth watching if you're looking for a good time." will be truncated to "This movie is a solid action movie. Not all of the dialogue is "
+NOTICE:  identifier "This film was a fun ride all the way through. It's lack of scariness(non existent) and *GASP!* gore is more than made up for with the constant flow of hilarity and likable characters. This is by far the optimist's zombie film, as the way things play out are definitely different than any one thats come before it(definitely not a Romero flick, though I think his Land of the Dead actually is second place in this regard). It has a sleek, very modern sense of style-just watch for how each rule makes it's appearance/reappearance and a good message on the importance of others in the worst of times. I recommend this to anybody who has a remote interest in comedies, zombie/end of the world flicks, or just having a good time at the theater, and look forward to seeing it again when it comes out." will be truncated to "This film was a fun ride all the way through. It's lack of scar"
+NOTICE:  identifier "There aren't many movies better than Ghostbusters. This film expertly balances itself right between the horror genre and the comedy genre. The chemistry of the main three characters is undeniable, and when you throw in interesting side characters (such as Rick Moranis as Louis Tully), every scene is a delight to watch. The story is original, the effects are impressive and the jokes are funny - in short, Ghostbusters is a timeless classic." will be truncated to "There aren't many movies better than Ghostbusters. This film ex"
+NOTICE:  identifier "I sat in a packed yet silent theater this morning and watched, what I believe to be, the next Academy Award winner for the Best Picture. I'm not at all a fan of war movies but I am a fan of great movies....and 1917 is a great movie. I have never been so mesmerized by set design and direction, the mass human emotion of this film is astonishingly captured and embedded magically in the audience. It keeps running through my mind...the poetry and beauty intertwined with the raw misery of war. Treat yourself....see this movie!" will be truncated to "I sat in a packed yet silent theater this morning and watched, "
+NOTICE:  identifier "This film deserves the criticism it gets and while flawed and nowhere near the classic Carpenter film, it did finally tell the tale of how the Thing was discovered. Also the limitations of the Thing not being able to replicate metal was a clever touch in my opinion." will be truncated to "This film deserves the criticism it gets and while flawed and n"
+NOTICE:  identifier "Well, I am bit puzzled. What can I say? Was the movie well done? Yes and no. There are certain weak parts and obvious stronger bits. Jude Law and Robert Downey Jnr both are great as Watson and Holmes, as well as Stephen Fry is a very funny Microft. But then, there are some big mistakes in casting. Noomi Rapace is The biggest blunder. She was great in The Swedish Girl Who... Trilogy, but here no. She is weak, pale, blunt, shallow and gray. The only part we remember of her? Her eating some food near The Eiffel Tower. Pity that there is no so much Rachel McAdamas this time, she was great then and good here What else can I say? The movie is well cut and shot, it is dark and ominous, as intended, and some scenes are pure Matrix-quality. But then, there are so many goofs and funny anachronisms that make the whole movie a bit unserious. My opinion? it was OK, and fun. A bit too prolonged at times." will be truncated to "Well, I am bit puzzled. What can I say? Was the movie well done"
+NOTICE:  identifier "From all the Booksmart ripoffs I've seen, this is clearly one of the better ones." will be truncated to "From all the Booksmart ripoffs I've seen, this is clearly one o"
+NOTICE:  identifier "'Alien' while technically science fiction is also one of the greatest horror/suspense movies ever made. Ridley Scott is now one of the most well known and successful directors in Hollywood, but I don't think anything he's made in the last ten years is a patch on this perfect film, which is a near masterpiece in my opinion. In fact, on reflection there are only three Scott movies I genuinely like, those being his first three. The last of these 'Blade Runner' was released twenty years ago now, so to me Scott is long past his use by date. Whatever, 'Alien' itself is a brilliant piece of work, and is almost flawless. Scott's direction is superb and everything else about it is outstanding - a strong script from Dan O'Bannon et al, an evocative score from Jerry Goldsmith, brilliant design and special effects, including the amazing contributions from H.R.Giger, all add up to an amazing movie experience. I also really liked how the cast were character actors and not 'stars' so there was plenty of suspense generated as to who will live and who will die. This is something very few subsequent movies have done, 'Pitch Black' being one of the exceptions. Sigourney Weaver may be an icon as Ripley now, but when the movie was first released she was virtually unknown, having had a small cameo in Woody Allen's 'Annie Hall' and not much else. The rest of the cast are equally as good. I especially enjoyed Yaphet Kotto ('Blue Collar') and the legendary Harry Dean Stanton ('Wise Blood') as the wise cracking 'below deck' crew. Many people seem to prefer James Cameron's sequel 'Aliens' over this, but as I much prefer horror and suspense movies to action ones I think this is definitely the better movie, and still the strongest and most effective in the series. 'Alien' is a horror classic and an absolutely unforgettable movie that I can't recommend highly enough. If you haven't seen it before watch it immediately!" will be truncated to "'Alien' while technically science fiction is also one of the gr"
+NOTICE:  identifier "John Carpenter's The Thing is hands down the best horror film ever made. Not only that, but it is also on of my personal favorite films of all time. What makes the movie so great? It's hard to put my finger on it. Everything just seems to work in The Thing, it's one of the rare occasions where everything just seems to fall in place. The film is even superior to Alien in creating a type of moody atmospheric hell. The fact that it's not only about the gore (which is wonderful btw), but it is able to create a paranoia that is unmatched in films. A truly wonderful film that is worshiped by all horror buffs, and anyone who has good taste in films." will be truncated to "John Carpenter's The Thing is hands down the best horror film e"
+ERROR:  column "What can I say? Jurassic Park is one of the most underrated mov" does not exist
+LINE 2: (0, 3, 9, "What can I say? Jurassic Park is one of the most ...
+                  ^
+anguy224=> INSERT INTO Imdb (movieid, imdb_rating, imdbid) VALUES
+anguy224-> (0, 8.1, 'tt0084787'),
+anguy224-> (1, 6.2, 'tt0905372'),
+anguy224-> (2, 8.4, 'tt8579674'),
+anguy224-> (3, 8.1, 'tt0107290'),
+anguy224-> (4, 8.4, 'tt0078748'),
+anguy224-> (5, 8, 'tt0088247'),
+anguy224-> (6, 7.8, 'tt0087332'),
+anguy224-> (7, 7.6, 'tt1156398'),
+anguy224-> (8, 7.5, 'tt1515091'),
+anguy224-> (9, 7.6, 'tt0829482');
+INSERT 0 10
+anguy224=> INSERT INTO reviews (customerid, movieid, rating, review_text) VALUES
+anguy224-> (0, 3, 9, `What can I say? Jurassic Park is one of the most underrated movies ever. Yes,  I did say underrated. True, it is the fourth highest grossing movie ever (for the time being) and wa s a motion picture bible for eight-year-olds across the country, but it has never been regarded as a rtistically superior. When, in reality, it is one of the most artistically inventive movies ever. It  contains all of Spielberg's magical strokes of genius from fantastic art direction and wonderful ca mera techniques to astounding technical quality ( which comes from his well known control over techn ology). The minor flaws of a theme park are masterfully embedded into the art direction, script etc.  and the acting is superb. This is one of the only movies I've seen with great acting by children. S pielberg's camera usage ranges from foreshadowing the appearance of dinosaurs with extreme up-angles  to exquisitely composed scenes of the dinosaurs' 'interaction' with the characters. Aside from tech nical quality, Jurassic Park bears powerful social messages of human intrusion and destruction of na tural environment and the self-revering nature of man. Also, it had an undeniable effect on cinema b eing one of the first movies to use CGI at such a large scale. However, the most ingenious aspect of  the film is the portrayal of the dinosaurs as animals rather than ruthless monsters. At many times  throughout the movie, the humans are portrayed as antagonists and the respect and appreciation of th e dinosaurs is wonderfully developed. And, best of all, like star wars you can analyze the movie all  you want or just sit back and enjoy the ride.`);
+ERROR:  syntax error at or near "can"
+LINE 2: (0, 3, 9, `What can I say? Jurassic Park is one of the most ...
+                        ^
+anguy224=> INSERT INTO reviews (customerid, movieid, rating, review_text) VALUES
+anguy224-> (0, 3, 9, 'What can I say? Jurassic Park is one of the most underrated movies ever. Yes,  I did say underrated. True, it is the fourth highest grossing movie ever (for the time being) and wa s a motion picture bible for eight-year-olds across the country, but it has never been regarded as a rtistically superior. When, in reality, it is one of the most artistically inventive movies ever. It  contains all of Spielberg's magical strokes of genius from fantastic art direction and wonderful ca mera techniques to astounding technical quality ( which comes from his well known control over techn ology). The minor flaws of a theme park are masterfully embedded into the art direction, script etc.  and the acting is superb. This is one of the only movies I've seen with great acting by children. S pielberg's camera usage ranges from foreshadowing the appearance of dinosaurs with extreme up-angles  to exquisitely composed scenes of the dinosaurs' 'interaction' with the characters. Aside from tech nical quality, Jurassic Park bears powerful social messages of human intrusion and destruction of na tural environment and the self-revering nature of man. Also, it had an undeniable effect on cinema b eing one of the first movies to use CGI at such a large scale. However, the most ingenious aspect of  the film is the portrayal of the dinosaurs as animals rather than ruthless monsters. At many times  throughout the movie, the humans are portrayed as antagonists and the respect and appreciation of th e dinosaurs is wonderfully developed. And, best of all, like star wars you can analyze the movie all  you want or just sit back and enjoy the ride.');
+ERROR:  syntax error at or near "s"
+LINE 2: ...ventive movies ever. It contains all of Spielberg's magical ...
+                                                             ^
+anguy224=> INSERT INTO reviews (customerid, movieid, rating, review_text) VALUES
+anguy224-> (0, 3, 9, 'What can I say? Jurassic Park is one of the most underrated movies ever. Yes,  I did say underrated. True, it is the fourth highest grossing movie ever (for the time being) and wa s a motion picture bible for eight-year-olds across the country, but it has never been regarded as a rtistically superior. When, in reality, it is one of the most artistically inventive movies ever. It  contains all of Spielberg''s magical strokes of genius from fantastic art direction and wonderful c amera techniques to astounding technical quality ( which comes from his well known control over tech nology). The minor flaws of a theme park are masterfully embedded into the art direction, script etc . and the acting is superb. This is one of the only movies I''ve seen with great acting by children.  Spielberg''s camera usage ranges from foreshadowing the appearance of dinosaurs with extreme up-ang les to exquisitely composed scenes of the dinosaurs'' ''interaction'' with the characters. Aside fro m technical quality, Jurassic Park bears powerful social messages of human intrusion and destruction  of natural environment and the self-revering nature of man. Also, it had an undeniable effect on ci nema being one of the first movies to use CGI at such a large scale. However, the most ingenious asp ect of the film is the portrayal of the dinosaurs as animals rather than ruthless monsters. At many  times throughout the movie, the humans are portrayed as antagonists and the respect and appreciation  of the dinosaurs is wonderfully developed. And, best of all, like star wars you can analyze the mov ie all you want or just sit back and enjoy the ride.'),
+anguy224-> (1, 5, 8, 'This movie is a solid action movie. Not all of the dialogue is great and some  of the effects are a bit dated - but this movie is still effective. The acting is great. The plot is  great. This movie is well-shot and worth watching. I can''t really come up with many things that ar e bad about it that don''t have to do with it being old. This is just a fun movie with good action,  time travel, and robots. I''d definitely recommend this movie. Its worth watching if you''re looking  for a good time.'),
+anguy224-> (2, 7, 8, 'This film was a fun ride all the way through. It''s lack of scariness(non exis tent) and *GASP!* gore is more than made up for with the constant flow of hilarity and likable chara cters. This is by far the optimist''s zombie film, as the way things play out are definitely differe nt than any one thats come before it(definitely not a Romero flick, though I think his Land of the D ead actually is second place in this regard). It has a sleek, very modern sense of style-just watch  for how each rule makes it''s appearance/reappearance and a good message on the importance of others  in the worst of times. I recommend this to anybody who has a remote interest in comedies, zombie/en d of the world flicks, or just having a good time at the theater, and look forward to seeing it agai n when it comes out.'),
+anguy224-> (3, 6, 10, 'There aren''t many movies better than Ghostbusters. This film expertly balanc es itself right between the horror genre and the comedy genre. The chemistry of the main three chara cters is undeniable, and when you throw in interesting side characters (such as Rick Moranis as Loui s Tully), every scene is a delight to watch. The story is original, the effects are impressive and t he jokes are funny - in short, Ghostbusters is a timeless classic.'),
+anguy224-> (4, 2, 10, 'I sat in a packed yet silent theater this morning and watched, what I believe  to be, the next Academy Award winner for the Best Picture. I''m not at all a fan of war movies but  I am a fan of great movies....and 1917 is a great movie. I have never been so mesmerized by set desi gn and direction, the mass human emotion of this film is astonishingly captured and embedded magical ly in the audience. It keeps running through my mind...the poetry and beauty intertwined with the ra w misery of war. Treat yourself....see this movie!'),
+anguy224-> (5, 1, 7, 'This film deserves the criticism it gets and while flawed and nowhere near the  classic Carpenter film, it did finally tell the tale of how the Thing was discovered. Also the limi tations of the Thing not being able to replicate metal was a clever touch in my opinion.'),
+anguy224-> (6, 8, 6, 'Well, I am bit puzzled. What can I say? Was the movie well done? Yes and no. T here are certain weak parts and obvious stronger bits. Jude Law and Robert Downey Jnr both are great  as Watson and Holmes, as well as Stephen Fry is a very funny Microft. But then, there are some big  mistakes in casting. Noomi Rapace is The biggest blunder. She was great in The Swedish Girl Who... T rilogy, but here no. She is weak, pale, blunt, shallow and gray. T

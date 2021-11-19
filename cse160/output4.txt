@@ -1,0 +1,89 @@
+Script started on Fri 15 May 2020 04:25:52 PM PDT
+[?1034hbash-4.2$ psql -h cse180-db-spring.lt.ucsc.edu -U anguy224
+Password for user anguy224: 
+psql (11.7, server 11.8)
+Type "help" for help.
+
+[?1034hanguy224=> SELECT title, ABS(rating - imdb_rating), 
+anguy224->     CASE WHEN rating > imdb_rating THEN 'rating'
+anguy224->     WHEN rating < imdb_rating THEN 'imdb'
+anguy224->     ELSE 'rating'
+anguy224->     END AS "H-value"
+anguy224->     FROM movies
+anguy224->     JOIN reviews ON movies.movieid = reviews.movieid
+anguy224->     JOIN imdb ON movies.movieid = imdb.movieid
+anguy224->     ORDER BY ABS(rating - imdb_rating) DESC;
+               title                | abs | H-value 
+------------------------------------+-----+---------
+ Alien                              | 2.4 | imdb
+ Ghostbusters                       | 2.2 | rating
+ The Thing                          | 1.9 | rating
+ 1917                               | 1.6 | rating
+ Sherlock Holmes: A Game of Shadows | 1.5 | imdb
+ Jurassic Park                      | 0.9 | rating
+ The Thing                          | 0.8 | rating
+ Superbad                           | 0.6 | imdb
+ Zombieland                         | 0.4 | rating
+ The Terminator                     |   0 | rating
+(10 rows)
+
+anguy224=> SELECT title, ABS(rating - imdb_rating), 
+anguy224->     CASE WHEN rating > imdb_rating THEN 'rating'
+anguy224->     WHEN rating < imdb_rating THEN 'imdb'
+anguy224->     ELSE 'rating'
+anguy224->     END AS "H-value"
+anguy224->     FROM movies
+anguy224->     JOIN reviews ON movies.movieid = reviews.movieid
+anguy224->     JOIN imdb ON movies.movieid = imdb.movieid
+anguy224->     ORDER BY ABS(rating - imdb_rating) DESC;
+               title                | abs | H-value 
+------------------------------------+-----+---------
+ Alien                              | 2.4 | imdb
+ Ghostbusters                       | 2.2 | rating
+ The Thing                          | 1.9 | rating
+ 1917                               | 1.6 | rating
+ Sherlock Holmes: A Game of Shadows | 1.5 | imdb
+ Jurassic Park                      | 0.9 | rating
+ The Thing                          | 0.8 | rating
+ Superbad                           | 0.6 | imdb
+ Zombieland                         | 0.4 | rating
+ The Terminator                     |   0 | rating
+(10 rows)
+
+anguy224=> SELECT title, ABS(rating - imdb_rating), 
+anguy224->     CASE WHEN rating > imdb_rating THEN 'rating'
+anguy224->     WHEN rating < imdb_rating THEN 'imdb'
+anguy224->     ELSE 'rating'
+anguy224->     END AS "H-value"
+anguy224->     FROM movies
+anguy224->     JOIN reviews ON movies.movieid = reviews.movieid
+anguy224->     JOIN imdb ON movies.movieid = imdb.movieid
+anguy224->     ORDER BY ABS(rating - imdb_rating) DESC;
+               title                | abs | H-value 
+------------------------------------+-----+---------
+ Alien                              | 2.4 | imdb
+ Ghostbusters                       | 2.2 | rating
+ The Thing                          | 1.9 | rating
+ 1917                               | 1.6 | rating
+ Sherlock Holmes: A Game of Shadows | 1.5 | imdb
+ Jurassic Park                      | 0.9 | rating
+ The Thing                          | 0.8 | rating
+ Superbad                           | 0.6 | imdb
+ Zombieland                         | 0.4 | rating
+ The Terminator                     |   0 | rating
+(10 rows)
+
+anguy224=> SELECT title, ABS(rating - imdb_rating), 
+anguy224->     CASE WHEN rating > imdb_rating THEN 'rating'
+anguy224->     WHEN rating < imdb_rating THEN 'imdb'
+anguy224->     ELSE 'rating'
+anguy224->     END AS "H-value"
+anguy224->     FROM movies
+anguy224->     JOIN reviews ON movies.movieid = reviews.movieid
+anguy224->     JOIN imdb ON movies.movieid = imdb.movieid
+anguy224->     ORDER BY ABS(rating - imdb_rating) DESC;
+               title                | abs | H-value 
+------------------------------------+-----+---------
+ Alien                              | 2.4 | imdb
+ Ghostbusters                       | 2.2 | rating
+ The Thing
